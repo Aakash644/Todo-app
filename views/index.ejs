@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- linking bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- linking custom css -->
+        <link rel="stylesheet" href="css/style.css">
+    <title>Mytodo</title>
+</head>
+
+<body align="center">
+    <div class="container">
+        <div class="box">
+            <h1 align="center"> Todo list</h1>
+            <!-- using for loop -->
+            <% for(let i=0;i<items.length;i++){ %>
+                <div class="form-check">
+                    <form class="del" action="/del" method="post">
+                        <div class="label">
+                            <input class="id" type="checkbox" name="id" id="">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                <%= items[i] %>
+                            </label>
+                        </div>
+                        <div class="btn btn-primary">
+                            <button type="submit" name="item" style="border:0 solid;border-radius: 10px;"
+                                value="<%= items[i] %>"><svg xmlns="http://www.w3.org/2000/svg" width="20px"
+                                    height="20px" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                </svg></button>
+                        </div>
+                    </form>
+                 </div>
+                 <% } %>
+                    <div class="input">
+                        <form class="form1" action="/" method="post">
+                            <input type="text" style="border-radius:10px;width:267px;height: 40px;"
+                                placeholder="Add Task" name="newitem">
+                            <button type="submit" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="30px" height="30px" fill="currentColor" color="white"
+                                    class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                                </svg></button>
+                        </form>
+                    </div>
+        </div>
+
+    </div>
+    <!-- bootstrap script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
