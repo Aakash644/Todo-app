@@ -13,14 +13,14 @@ A simple todo app built with Node.js and Express, providing CRUD functionality.
 - Express
 - JavaScript
 - Bootstrap
-
+- MongoDb
 
 ## Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/todo-app.git
+   git clone <github repo URL>
    ```
 
 2. Install the dependencies:
