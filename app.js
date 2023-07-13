@@ -1,44 +1,44 @@
-const express=require("express");
-const bodyParser=require("body-parser");
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
-const app=express();
-app.set('view engine','ejs');
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({extended:true}));
- 
-var items=[];
-//function to search for items in the list to delete 
-function search(items,val){
-    for(let i=0;i<items.length;i++){
-        if(items[i]===val){
-            return i;
-        }
-    }
-    return -1;
-}
+const app = express();
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/',function(req,res){
-    
-    res.render('index',{items:items});
+mongoose.connect("mongodb://127.0.0.1:27017/student", {
+  UseNewUrlParser: true,
 });
 
-app.post('/',function(req,res){
-    var item=req.body.newitem;
-    if(item!=""){
-    items.push(item); }
- 
-    res.render('index',{items:items});
+const todoschema = new mongoose.Schema({ name: String });
+const todo = mongoose.model("todolist", todoschema);
+
+app.get("/", async function (req, res) {
+  try {
+    var items = await todo.find();
+  } catch (err) {
+    console.log(err);
+  }
+  res.render("index", { items: items });
+});
+
+app.post("/", async function (req, res) {
+  //post
+  const item = req.body.newitem;
+  if (item != "") {
+    todo({ name: item }).save();
+  }
+  res.redirect("/");
 });
 //delete route
-app.post('/del',function(req,res){
-    var item2=req.body.item;
-    console.log(item2); 
-    if(search(items,item2)>=0){
-        items.splice(search(items,item2),1);
-    }
-    res.render('index',{items:items});
+
+app.post("/del", async function (req, res) {
+  var item2 = req.body.item;
+  const query = await todo.findByIdAndRemove(item2);
+  res.redirect("/");
 });
 
-app.listen(3000,function(){
-console.log("listening on port 3000.");
+app.listen(3000, function () {
+  console.log("listening on port 3000.");
 });
